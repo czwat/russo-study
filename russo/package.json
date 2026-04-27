@@ -1,8 +1,0 @@
-{
-  "name": "russo-study-app",
-  "version": "1.0.0",
-  "type": "commonjs",
-  "scripts": {
-    "dev": "netlify dev"
-  }
-}
