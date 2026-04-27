@@ -12,13 +12,19 @@ exports.handler = async function(event) {
     }
 
     const body = JSON.parse(event.body || '{}');
-    const { task, subject, text, quantity = 10, mode = 'misto' } = body;
+    const {
+      task,
+      subject,
+      text,
+      quantity = 10,
+      mode = 'misto'
+    } = body;
 
     if (!task) {
       return json(400, { error: 'Tarefa não informada' });
     }
 
-    if (!text || text.trim().length < 200) {
+    if (!text || text.trim().length < 180) {
       return json(400, { error: 'Texto insuficiente para análise inteligente' });
     }
 
@@ -26,13 +32,9 @@ exports.handler = async function(event) {
 
     if (task === 'study-guide') {
       prompt = buildStudyGuidePrompt(subject, text);
-    }
-
-    if (task === 'quiz') {
+    } else if (task === 'quiz') {
       prompt = buildQuizPrompt(subject, text, quantity, mode);
-    }
-
-    if (!prompt) {
+    } else {
       return json(400, { error: 'Tarefa inválida' });
     }
 
@@ -48,16 +50,12 @@ exports.handler = async function(event) {
           contents: [
             {
               role: 'user',
-              parts: [
-                {
-                  text: prompt
-                }
-              ]
+              parts: [{ text: prompt }]
             }
           ],
           generationConfig: {
-            temperature: task === 'quiz' ? 0.45 : 0.25,
-            maxOutputTokens: task === 'quiz' ? 60000 : 16000,
+            temperature: task === 'quiz' ? 0.35 : 0.2,
+            maxOutputTokens: task === 'quiz' ? 8000 : 4000,
             responseMimeType: 'application/json'
           }
         })
@@ -87,7 +85,7 @@ exports.handler = async function(event) {
 
     try {
       parsed = JSON.parse(cleanJson(outputText));
-    } catch {
+    } catch (err) {
       return json(500, {
         error: 'Gemini respondeu fora do formato esperado',
         raw: outputText
@@ -124,23 +122,27 @@ function cleanJson(text) {
 
 function buildStudyGuidePrompt(subject, text) {
   return `
-Você é uma IA especialista em estudo acadêmico, revisão estratégica e preparação para provas.
+Você é uma IA de alto nível especializada em estudo acadêmico, revisão estratégica e preparação para provas.
 
-Analise o conteúdo da matéria: "${subject || 'não informada'}".
+MATÉRIA:
+${subject || 'não informada'}
 
-OBJETIVO:
-Transformar o material em um guia de estudo inteligente.
+MISSÃO:
+Transformar o conteúdo abaixo em um GUIA DE ESTUDO INTELIGENTE.
 
 REGRAS:
-- Não faça resumo literal.
+- Não faça resumo literal do PDF.
+- Não copie frases aleatórias do material.
 - Não copie enunciados de questões.
-- Ignore alternativas, gabaritos, numeração, rodapés e cabeçalhos.
-- Foque no conteúdo real que a aluna precisa aprender.
-- Extraia o que costuma cair em prova.
-- Explique conceitos de forma clara.
+- Ignore alternativas, gabaritos, numeração, cabeçalhos, rodapés, sumário e bibliografia.
+- Foque somente no conteúdo real e útil para estudar.
+- Explique o conteúdo como se estivesse preparando uma aluna para prova.
+- Identifique conceitos centrais.
+- Diga o que costuma cair.
 - Aponte pegadinhas.
-- Diga o que estudar primeiro.
-- Pense como um professor preparando revisão antes da prova.
+- Organize a prioridade do estudo.
+- Faça perguntas rápidas para revisão ativa.
+- Seja clara, útil e objetiva.
 
 RETORNE APENAS JSON VÁLIDO, sem markdown, neste formato:
 
@@ -149,21 +151,21 @@ RETORNE APENAS JSON VÁLIDO, sem markdown, neste formato:
   "concepts": [
     {
       "term": "Nome do conceito",
-      "context": "Explicação clara do conceito com base no material",
-      "why_it_matters": "Por que esse conceito costuma cair em prova"
+      "context": "Explicação clara e didática do conceito com base no conteúdo",
+      "why_it_matters": "Por que isso importa e como costuma cair em prova"
     }
   ],
   "pontos_de_prova": [
-    "Ponto importante que pode cair em prova"
+    "Ponto importante que tem chance de cair em prova"
   ],
   "pegadinhas": [
-    "Confusão comum ou detalhe perigoso"
+    "Erro comum, confusão provável ou detalhe perigoso"
   ],
   "resumo_ativo": [
     "Frase curta para revisão ativa"
   ],
   "prioridade_de_estudo": [
-    "O que estudar primeiro e por quê"
+    "O que estudar primeiro, em ordem, com justificativa"
   ],
   "perguntas_rapidas": [
     "Pergunta curta para autoavaliação"
@@ -179,30 +181,55 @@ function buildQuizPrompt(subject, text, quantity, mode) {
   return `
 Você é uma IA especialista em criar questões de prova acadêmica.
 
-Crie ${quantity} questões objetivas sobre a matéria: "${subject || 'não informada'}".
+MATÉRIA:
+${subject || 'não informada'}
+
+QUANTIDADE:
+${quantity}
 
 MODO:
 ${mode}
 
-REGRAS:
+MISSÃO:
+Criar questões realmente úteis para estudar, com cara de prova real.
+
+REGRAS OBRIGATÓRIAS:
 - Use SOMENTE o conteúdo fornecido.
-- Não copie questões prontas do PDF.
-- Não copie enunciados antigos.
+- Não copie questões prontas.
+- Não copie enunciados do PDF.
 - Não transforme alternativas antigas em novas questões.
-- Crie questões novas, com cara de prova real.
+- Crie questões novas e objetivas.
 - Cada questão deve ter 5 alternativas.
 - Apenas 1 alternativa correta.
-- Cobre entendimento real, não memorização solta.
-- Varie entre definição, aplicação, comparação, consequência, causa e efeito, pegadinhas e interpretação.
 - As alternativas erradas devem ser plausíveis.
-- A explicação deve ensinar.
+- A explicação deve ensinar o conteúdo.
+- A questão deve cobrar raciocínio, não memorização solta.
+- Faça enunciados objetivos.
+- Evite alternativas longas.
+- A explicação deve ter no máximo 2 frases.
+- Não use textos enormes nas alternativas.
+
+VARIE ENTRE:
+- definição de conceito
+- função de um conceito
+- comparação entre conceitos parecidos
+- causa e consequência
+- aplicação em situação prática
+- pegadinhas
+- interpretação do conteúdo
+- associação entre tema e característica
+
+NÃO FAÇA QUESTÕES FRACAS COMO:
+- "qual palavra aparece no texto?"
+- "qual termo foi citado?"
+- "qual alternativa contém um conceito?"
 
 RETORNE APENAS JSON VÁLIDO, sem markdown, neste formato:
 
 {
   "questions": [
     {
-      "statement": "Enunciado da questão",
+      "statement": "Enunciado novo, claro e com cara de prova",
       "alternatives": [
         "Alternativa A",
         "Alternativa B",
@@ -211,8 +238,8 @@ RETORNE APENAS JSON VÁLIDO, sem markdown, neste formato:
         "Alternativa E"
       ],
       "correctIndex": 0,
-      "explanation": "Explicação clara do gabarito",
-      "studyPoint": "Ponto do conteúdo que essa questão cobra",
+      "explanation": "Explicação curta e didática",
+      "studyPoint": "Ponto do conteúdo cobrado",
       "difficulty": "fácil | médio | difícil"
     }
   ]
