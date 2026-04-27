@@ -12,7 +12,7 @@ exports.handler = async function(event) {
     }
 
     const body = JSON.parse(event.body || '{}');
-    const { task, subject, text, quantity = 50, mode = 'misto' } = body;
+    const { task, subject, text, quantity = 10, mode = 'misto' } = body;
 
     if (!task) {
       return json(400, { error: 'Tarefa não informada' });
