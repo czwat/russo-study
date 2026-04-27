@@ -1120,7 +1120,15 @@
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || 'Erro ao chamar Gemini');
+    console.error('Erro Gemini completo:', data);
+
+    const detailedMessage =
+      data?.details?.error?.message ||
+      data?.details?.message ||
+      data?.error ||
+      'Erro ao chamar Gemini';
+
+    throw new Error(detailedMessage);
   }
 
   return data;
