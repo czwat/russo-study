@@ -1117,7 +1117,16 @@
     })
   });
 
-  const data = await response.json();
+  const contentType = response.headers.get('content-type') || '';
+  let data;
+
+  if (contentType.includes('application/json')) {
+    data = await response.json();
+  } else {
+    const text = await response.text();
+    console.error('Resposta não JSON da função:', text.slice(0, 500));
+    throw new Error('A função demorou demais ou retornou erro HTML do Netlify.');
+  }
 
   if (!response.ok) {
     console.error('Erro Gemini completo:', data);
