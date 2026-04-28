@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Russo</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -19,7 +20,6 @@
       --muted:#ddb4cc;
       --primary:#ff5fa2;
       --primary2:#ff8ac0;
-      --accent:#ffc1dc;
       --success:#34d399;
       --warning:#f59e0b;
       --danger:#fb7185;
@@ -72,20 +72,13 @@
       width:50px;
       height:50px;
       border-radius:17px;
-      overflow:hidden;
       display:grid;
       place-items:center;
       font-weight:900;
+      font-size:22px;
       background:linear-gradient(135deg,var(--primary),var(--primary2));
       box-shadow:0 12px 28px rgba(255,95,162,.28);
       flex:0 0 auto;
-    }
-
-    .mark img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
     }
 
     .brand h1{
@@ -168,7 +161,7 @@
 
     .nav button{
       flex:1;
-      min-width:125px;
+      min-width:130px;
       min-height:46px;
       background:rgba(255,255,255,.06);
       box-shadow:none;
@@ -540,9 +533,7 @@
   <div class="app">
     <header>
       <div class="brand">
-        <div class="mark">
-          <img src="FullSizeRender.jpeg" alt="Russo" onerror="this.style.display='none'; this.parentElement.textContent='R';">
-        </div>
+        <div class="mark">R</div>
         <div>
           <h1>Russo</h1>
           <p id="saveStatus">Oi bibia, eu estou aqui pra ajudar você a estudar!</p>
@@ -550,7 +541,6 @@
       </div>
 
       <div class="top-actions">
-        <button class="secondary" id="notifyBtn">Lembretes</button>
         <button class="secondary" id="exportBtn">Exportar</button>
         <button class="secondary" id="importBtn">Importar</button>
         <button class="red" id="resetBtn">Zerar</button>
@@ -561,7 +551,6 @@
     <nav class="nav">
       <button class="active" data-page="inicio">Início</button>
       <button data-page="materiais">Materiais</button>
-      <button data-page="cronograma">Cronograma</button>
       <button data-page="revisoes">Revisões</button>
       <button data-page="simulado">Simulado</button>
       <button data-page="relatorios">Relatórios</button>
@@ -572,9 +561,7 @@
         <div class="card strong">
           <div class="welcome">Oi bibia, eu estou aqui pra ajudar você a estudar!</div>
           <h2>Estude pelo que realmente importa.</h2>
-          <p>
-            Envie materiais, cronograma ou anotações. Eu organizo os pontos de estudo, monto revisões e crio simulados.
-          </p>
+          <p>Envie materiais, gere guias inteligentes, revise e treine com questões objetivas.</p>
 
           <div class="flow">
             <div class="step">
@@ -583,11 +570,11 @@
             </div>
             <div class="step">
               <strong>2. Organizar</strong>
-              <span>guia de estudo e revisões</span>
+              <span>guia de estudo</span>
             </div>
             <div class="step">
               <strong>3. Treinar</strong>
-              <span>questões e simulados</span>
+              <span>simulado de 10 questões</span>
             </div>
           </div>
 
@@ -622,7 +609,7 @@
       <div class="grid">
         <div class="card strong">
           <h3>Novo material</h3>
-          <div class="sub">anexe vários arquivos ou cole texto/transcrição</div>
+          <div class="sub">anexe arquivos ou cole texto/transcrição</div>
 
           <div class="form-grid">
             <label>Matéria
@@ -667,60 +654,10 @@
       </div>
     </section>
 
-    <section class="page" id="cronograma">
-      <div class="grid">
-        <div class="card strong">
-          <h3>Novo compromisso</h3>
-          <div class="sub">aula, prova, trabalho ou prazo</div>
-
-          <div class="form-grid">
-            <label>Tipo
-              <select id="eventType">
-                <option value="aula">Aula</option>
-                <option value="prova">Prova</option>
-                <option value="trabalho">Trabalho</option>
-                <option value="outro">Outro</option>
-              </select>
-            </label>
-
-            <label>Matéria
-              <input type="text" id="eventSubject" placeholder="Ex: Anatomia">
-            </label>
-
-            <label>Título
-              <input type="text" id="eventTitle" placeholder="Ex: Prova 1">
-            </label>
-
-            <label>Data
-              <input type="date" id="eventDate">
-            </label>
-
-            <label>Horário
-              <input type="time" id="eventTime">
-            </label>
-
-            <label>Observação
-              <input type="text" id="eventNote" placeholder="Opcional">
-            </label>
-          </div>
-
-          <div class="actions">
-            <button id="addEventBtn">Salvar compromisso</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Próximos compromissos</h3>
-          <div class="list" id="eventsList" style="margin-top:14px"></div>
-        </div>
-      </div>
-    </section>
-
     <section class="page" id="revisoes">
       <div class="grid">
         <div class="card">
           <h3>Revisões pendentes</h3>
-          <div class="sub">conteúdos que precisam voltar</div>
           <div class="list" id="reviewsList" style="margin-top:14px"></div>
         </div>
 
@@ -734,7 +671,7 @@
     <section class="page" id="simulado">
       <div class="card strong">
         <h3>Gerar simulado</h3>
-        <div class="sub">questões feitas a partir dos pontos de estudo dos materiais</div>
+        <div class="sub">10 questões para evitar erro de limite e manter fluidez</div>
 
         <div class="form-grid">
           <label>Matéria
@@ -751,7 +688,7 @@
         </div>
 
         <div class="actions">
-          <button id="generateQuizBtn">Gerar 50 questões</button>
+          <button id="generateQuizBtn">Gerar 10 questões</button>
           <button class="secondary" id="clearQuizBtn">Limpar simulado</button>
         </div>
 
@@ -772,14 +709,9 @@
         </div>
 
         <div class="card">
-          <h3>Recomendações</h3>
-          <div id="recommendationsBox" style="margin-top:14px"></div>
+          <h3>Histórico de simulados</h3>
+          <div class="list" id="quizHistory" style="margin-top:14px"></div>
         </div>
-      </div>
-
-      <div class="card" style="margin-top:16px">
-        <h3>Histórico de simulados</h3>
-        <div class="list" id="quizHistory" style="margin-top:14px"></div>
       </div>
     </section>
   </div>
@@ -787,7 +719,7 @@
   <div class="toast-stack" id="toastStack"></div>
 
   <script>
-    const STORAGE_KEY = 'russo_gemini_ready_v1';
+    const STORAGE_KEY = 'russo_stable_gemini_v1';
 
     let state = loadState();
     let selectedFiles = [];
@@ -821,7 +753,6 @@
     function initialState(){
       return {
         materials: [],
-        events: [],
         reviews: [],
         quizHistory: [],
         updatedAt: null
@@ -843,14 +774,8 @@
     }
 
     function $(id){ return document.getElementById(id); }
-
-    function uid(){
-      return '_' + Math.random().toString(36).slice(2,11);
-    }
-
-    function todayISO(){
-      return new Date().toISOString().slice(0,10);
-    }
+    function uid(){ return '_' + Math.random().toString(36).slice(2,11); }
+    function todayISO(){ return new Date().toISOString().slice(0,10); }
 
     function addDays(days){
       const d = new Date();
@@ -974,8 +899,10 @@
         const pdf = await pdfjsLib.getDocument({data}).promise;
         let text = '';
 
-        for(let i=1;i<=pdf.numPages;i++){
-          $('fileStatus').textContent = `Lendo PDF: ${file.name} • página ${i}/${pdf.numPages}`;
+        const maxPages = Math.min(pdf.numPages, 25);
+
+        for(let i=1;i<=maxPages;i++){
+          $('fileStatus').textContent = `Lendo PDF: ${file.name} • página ${i}/${maxPages}`;
           const page = await pdf.getPage(i);
           const content = await page.getTextContent();
           text += content.items.map(item => item.str).join(' ') + '\n';
@@ -1009,6 +936,28 @@
         .filter(line => !/^\d{1,3}$/.test(line))
         .filter(line => !/^www\.|http/i.test(line))
         .join('. ');
+    }
+
+    function compactTextForAI(text, maxChars = 9000){
+      text = String(text || '').replace(/\s+/g, ' ').trim();
+
+      if(text.length <= maxChars) return text;
+
+      const start = text.slice(0, Math.floor(maxChars * 0.55));
+      const middleStart = Math.floor(text.length * 0.45);
+      const middle = text.slice(middleStart, middleStart + Math.floor(maxChars * 0.25));
+      const end = text.slice(-Math.floor(maxChars * 0.20));
+
+      return `
+INÍCIO DO MATERIAL:
+${start}
+
+TRECHO CENTRAL DO MATERIAL:
+${middle}
+
+FINAL DO MATERIAL:
+${end}
+`;
     }
 
     function extractKeywords(text, limit=40){
@@ -1101,126 +1050,172 @@
         pontos_de_prova: concepts.slice(0,8).map(c => `${c.term}: ${c.context}`),
         pegadinhas: concepts.slice(0,6).map(c => `Não decore só "${c.term}". Entenda definição, função e relação com outros conceitos.`),
         resumo_ativo: sentences.filter(s => hasDefinitionPattern(s)).slice(0,8).map(s => truncate(s, 220)),
-        prioridade_de_estudo: concepts.slice(0,5).map(c => c.term)
+        prioridade_de_estudo: concepts.slice(0,5).map(c => c.term),
+        perguntas_rapidas: concepts.slice(0,5).map(c => `Explique ${c.term} com suas palavras.`)
       };
     }
 
     async function callGemini(task, payload) {
-  const response = await fetch('/.netlify/functions/gemini', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      task,
-      ...payload
-    })
-  });
+      const response = await fetch('/.netlify/functions/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ task, ...payload })
+      });
 
-  const contentType = response.headers.get('content-type') || '';
-  let data;
+      const contentType = response.headers.get('content-type') || '';
 
-  if (contentType.includes('application/json')) {
-    data = await response.json();
-  } else {
-    const text = await response.text();
-    console.error('Resposta não JSON da função:', text.slice(0, 500));
-    throw new Error('A função demorou demais ou retornou erro HTML do Netlify.');
-  }
+      if (!contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Resposta não JSON:', text.slice(0,500));
+        throw new Error('A função retornou erro não JSON.');
+      }
 
-  if (!response.ok) {
-    console.error('Erro Gemini completo:', data);
+      const data = await response.json();
 
-    const detailedMessage =
-      data?.details?.error?.message ||
-      data?.details?.message ||
-      data?.error ||
-      'Erro ao chamar Gemini';
+      if (!response.ok) {
+        console.error('Erro Gemini:', data);
+        throw new Error(data.error || 'Erro ao chamar Gemini');
+      }
 
-    throw new Error(detailedMessage);
-  }
+      return data;
+    }
 
-  return data;
-}
+    async function analyzeWithAI(materialText, subject) {
+      try {
+        toast('Pensando com Gemini...', 'info');
 
-async function analyzeWithAI(materialText, subject) {
-  try {
-    const result = await callGemini('study-guide', {
-      subject,
-      text: materialText
-    });
+        const compactText = compactTextForAI(materialText, 9000);
 
-    return normalizeGeminiGuide(result, subject);
+        const result = await callGemini('study-guide', {
+          subject,
+          text: compactText
+        });
 
-  } catch (error) {
-    console.warn('Gemini falhou. Usando análise local:', error);
-    toast('Gemini indisponível. Usei análise local.', 'warn');
-    return analyzeLocally(materialText, subject);
-  }
-}
+        toast('Guia inteligente gerado.', 'success');
 
-function normalizeGeminiGuide(result, subject) {
-  const concepts = Array.isArray(result.concepts)
-    ? result.concepts.map(c => ({
-        term: c.term || c.nome || 'Conceito',
-        context: c.context || c.explicacao || '',
-        why_it_matters: c.why_it_matters || c.por_que_importa || ''
-      }))
-    : [];
+        return normalizeGeminiGuide(result, subject);
 
-  return {
-    subject: result.subject || subject,
-    concepts,
-    pontos_de_prova: Array.isArray(result.pontos_de_prova)
-      ? result.pontos_de_prova
-      : [],
-    pegadinhas: Array.isArray(result.pegadinhas)
-      ? result.pegadinhas
-      : [],
-    resumo_ativo: Array.isArray(result.resumo_ativo)
-      ? result.resumo_ativo
-      : [],
-    prioridade_de_estudo: Array.isArray(result.prioridade_de_estudo)
-      ? result.prioridade_de_estudo
-      : [],
-    perguntas_rapidas: Array.isArray(result.perguntas_rapidas)
-      ? result.perguntas_rapidas
-      : []
-  };
-}
+      } catch (error) {
+        console.error('Gemini falhou:', error);
+        toast('Gemini falhou. Usei análise local.', 'warn');
+        return analyzeLocally(materialText, subject);
+      }
+    }
+
+    async function generateQuizWithAI(subject, materialText, quantity=10, mode='misto') {
+      try {
+        toast('Gerando 10 questões com Gemini...', 'info');
+
+        const compactText = compactTextForAI(materialText, 7000);
+
+        const result = await callGemini('quiz', {
+          subject,
+          text: compactText,
+          quantity: 10,
+          mode
+        });
+
+        if (!result.questions || !Array.isArray(result.questions)) {
+          throw new Error('Formato inválido de questões');
+        }
+
+        toast('Simulado gerado com Gemini.', 'success');
+
+        return {
+          questions: result.questions.slice(0, 10).map((q, index) => {
+            const alternatives = Array.isArray(q.alternatives)
+              ? q.alternatives.slice(0, 5)
+              : [];
+
+            while (alternatives.length < 5) {
+              alternatives.push('Alternativa insuficiente para responder corretamente.');
+            }
+
+            let correctIndex = Number(q.correctIndex);
+            if (Number.isNaN(correctIndex) || correctIndex < 0 || correctIndex > 4) {
+              correctIndex = 0;
+            }
+
+            return {
+              id: q.id || uid(),
+              statement: q.statement || `Questão ${index + 1}`,
+              alternatives,
+              correctIndex,
+              explanation: q.explanation || 'A resposta correta se baseia no conteúdo enviado.',
+              base: q.studyPoint || q.base || 'Conteúdo dos materiais enviados.',
+              difficulty: q.difficulty || 'médio'
+            };
+          })
+        };
+
+      } catch (error) {
+        console.error('Gemini falhou no simulado:', error);
+        toast('Gemini falhou. Usei simulado local.', 'warn');
+        return generateQuizLocally(subject, materialText, 10, mode);
+      }
+    }
+
+    function normalizeGeminiGuide(result, subject) {
+      const concepts = Array.isArray(result.concepts)
+        ? result.concepts.map(c => ({
+            term: c.term || c.nome || 'Conceito',
+            context: c.context || c.explicacao || '',
+            why_it_matters: c.why_it_matters || c.por_que_importa || ''
+          }))
+        : [];
+
+      return {
+        subject: result.subject || subject,
+        concepts,
+        pontos_de_prova: Array.isArray(result.pontos_de_prova) ? result.pontos_de_prova : [],
+        pegadinhas: Array.isArray(result.pegadinhas) ? result.pegadinhas : [],
+        resumo_ativo: Array.isArray(result.resumo_ativo) ? result.resumo_ativo : [],
+        prioridade_de_estudo: Array.isArray(result.prioridade_de_estudo) ? result.prioridade_de_estudo : [],
+        perguntas_rapidas: Array.isArray(result.perguntas_rapidas) ? result.perguntas_rapidas : []
+      };
+    }
 
     function renderStudyGuide(guide){
       if(!guide || !guide.concepts?.length){
-        return '<div class="empty">Não consegui montar um guia bom. Tente enviar um PDF com texto selecionável ou cole uma transcrição/resumo.</div>';
+        return '<div class="empty">Não consegui montar um guia bom. Tente enviar mais texto ou uma transcrição.</div>';
       }
 
       return `
         <div class="study-guide">
           <div class="study-section">
-            <h4>Conceitos que você precisa dominar</h4>
+            <h4>Conceitos principais</h4>
             <div class="chip-row">
               ${guide.concepts.slice(0,12).map(c => `<span class="chip">${c.term}</span>`).join('')}
             </div>
           </div>
 
           <div class="study-section">
-            <h4>Pontos importantes para prova</h4>
-            <ul>${guide.pontos_de_prova.map(x => `<li>${x}</li>`).join('')}</ul>
+            <h4>Conceitos explicados</h4>
+            <ul>
+              ${guide.concepts.slice(0,8).map(c => `
+                <li><strong>${c.term}:</strong> ${c.context}${c.why_it_matters ? `<br><em>${c.why_it_matters}</em>` : ''}</li>
+              `).join('')}
+            </ul>
           </div>
 
           <div class="study-section">
-            <h4>Pegadinhas para evitar</h4>
-            <ul>${guide.pegadinhas.map(x => `<li>${x}</li>`).join('')}</ul>
+            <h4>Pontos que podem cair</h4>
+            <ul>${(guide.pontos_de_prova || []).map(x => `<li>${x}</li>`).join('')}</ul>
           </div>
 
           <div class="study-section">
-            <h4>Revisão rápida</h4>
-            <ul>${guide.resumo_ativo.map(x => `<li>${x}</li>`).join('')}</ul>
+            <h4>Pegadinhas</h4>
+            <ul>${(guide.pegadinhas || []).map(x => `<li>${x}</li>`).join('')}</ul>
           </div>
 
           <div class="study-section">
-            <h4>Prioridade de estudo</h4>
-            <ul>${guide.prioridade_de_estudo.map(x => `<li>${x}</li>`).join('')}</ul>
+            <h4>Revisão ativa</h4>
+            <ul>${(guide.resumo_ativo || []).map(x => `<li>${x}</li>`).join('')}</ul>
+          </div>
+
+          <div class="study-section">
+            <h4>Prioridade</h4>
+            <ul>${(guide.prioridade_de_estudo || []).map(x => `<li>${x}</li>`).join('')}</ul>
           </div>
         </div>
       `;
@@ -1237,11 +1232,11 @@ function normalizeGeminiGuide(result, subject) {
       }
 
       if(!selectedFiles.length && !manualText){
-        toast('Anexe pelo menos um arquivo ou cole um texto.', 'warn');
+        toast('Anexe um arquivo ou cole um texto.', 'warn');
         return;
       }
 
-      $('fileStatus').textContent = 'Analisando conteúdo de estudo...';
+      $('fileStatus').textContent = 'Analisando conteúdo...';
 
       const extractedParts = [];
 
@@ -1260,7 +1255,7 @@ function normalizeGeminiGuide(result, subject) {
 
       if(!finalText || finalText.split(/\s+/).length < 40){
         $('fileStatus').textContent = 'Pouco texto extraído.';
-        toast('Cole resumo, transcrição ou pontos do professor.', 'warn');
+        toast('Cole resumo, transcrição ou mais conteúdo.', 'warn');
         return;
       }
 
@@ -1287,7 +1282,6 @@ function normalizeGeminiGuide(result, subject) {
         title,
         guide,
         dueDate: todayISO(),
-        status: 'pendente',
         level: 'novo',
         createdAt: new Date().toISOString()
       });
@@ -1296,12 +1290,11 @@ function normalizeGeminiGuide(result, subject) {
       $('fileInput').value = '';
       $('manualText').value = '';
       $('titleInput').value = '';
-      $('fileStatus').textContent = 'Guia de estudo gerado.';
+      $('fileStatus').textContent = 'Guia gerado.';
 
       saveState();
       $('currentGuide').innerHTML = renderStudyGuide(guide);
       switchPage('materiais');
-      toast('Guia de estudo pronto.', 'success');
     }
 
     function getSubjects(){
@@ -1312,158 +1305,64 @@ function normalizeGeminiGuide(result, subject) {
       const materials = state.materials.filter(m => m.subject === subject);
       return {
         materials,
-        text: materials.map(m => `[${m.title}]\n${m.cleanText || m.rawText}`).join('\n\n'),
-        concepts: materials.flatMap(m => m.guide?.concepts || [])
+        text: materials.map(m => `[${m.title}]\n${m.cleanText || m.rawText}`).join('\n\n')
       };
     }
 
     function makeOptions(correct, pool){
       const alternatives = shuffle([correct, ...shuffle(pool.filter(x => x !== correct)).slice(0,4)]);
       while(alternatives.length < 5){
-        alternatives.push('Alternativa relacionada, mas insuficiente para responder ao enunciado.');
+        alternatives.push('Alternativa relacionada, mas insuficiente.');
       }
       return alternatives.slice(0,5);
     }
 
-    function generateQuizLocally(subject, materialText, quantity=50, mode='misto'){
+    function generateQuizLocally(subject, materialText, quantity=10, mode='misto'){
       const clean = cleanEducationalText(materialText);
       const keywords = extractKeywords(clean, 80);
-      let concepts = getConceptContexts(clean, keywords).filter(c => c.term && c.context);
+      const concepts = getConceptContexts(clean, keywords).filter(c => c.term && c.context);
 
       if(concepts.length < 6){
-        return { error:'Base insuficiente para gerar questões boas.' };
+        return { error:'Base insuficiente para gerar questões.' };
       }
 
       const questions = [];
 
-      function definitionQuestion(i){
+      function qDef(i){
         const concept = concepts[i % concepts.length];
-        const pool = concepts.map(c => c.context).filter(Boolean);
         const correct = concept.context;
+        const pool = concepts.map(c => c.context);
         const alternatives = makeOptions(correct, pool);
-        const correctIndex = alternatives.findIndex(a => a === correct);
-
         return {
           id: uid(),
           statement: `Sobre ${concept.term}, assinale a alternativa correta.`,
           alternatives,
-          correctIndex,
+          correctIndex: alternatives.findIndex(a => a === correct),
           base: `${concept.term}: ${concept.context}`,
           explanation: `A questão cobra compreensão do conceito ${concept.term}.`
         };
       }
 
-      function identificationQuestion(i){
+      function qId(i){
         const concept = concepts[i % concepts.length];
-        const clue = concept.context;
-        const pool = concepts.map(c => c.term);
         const correct = concept.term;
+        const pool = concepts.map(c => c.term);
         const alternatives = makeOptions(correct, pool);
-        const correctIndex = alternatives.findIndex(a => a === correct);
-
         return {
           id: uid(),
-          statement: `Um enunciado descreve: "${clue}". Qual conceito está sendo cobrado?`,
+          statement: `A ideia "${concept.context}" corresponde a qual conceito?`,
           alternatives,
-          correctIndex,
+          correctIndex: alternatives.findIndex(a => a === correct),
           base: `${concept.term}: ${concept.context}`,
-          explanation: `A resposta correta é o conceito que melhor representa a descrição.`
-        };
-      }
-
-      function applicationQuestion(i){
-        const concept = concepts[i % concepts.length];
-        const other = concepts[(i+3) % concepts.length] || concepts[0];
-
-        const correct = `Reconhecer ${concept.term} pela definição, função ou consequência apresentada no enunciado.`;
-        const alternatives = makeOptions(correct, [
-          `Confundir ${concept.term} com ${other.term}, sem observar a função de cada um.`,
-          `Responder apenas pelo nome do conceito, sem analisar o contexto.`,
-          `Ignorar a relação de causa, função ou consequência descrita no material.`,
-          `Associar o conceito a uma definição genérica que não aparece na base estudada.`,
-          `Escolher a alternativa mais longa, independentemente do conteúdo.`
-        ]);
-        const correctIndex = alternatives.findIndex(a => a === correct);
-
-        return {
-          id: uid(),
-          statement: `Em uma questão sobre ${concept.term}, qual estratégia leva à resposta correta?`,
-          alternatives,
-          correctIndex,
-          base: `${concept.term}: ${concept.context}`,
-          explanation: `A questão trabalha como o conteúdo tende a aparecer em prova: conceito + função + contexto.`
+          explanation: 'A resposta correta é o conceito que melhor representa a descrição.'
         };
       }
 
       for(let i=0;i<quantity;i++){
-        if(mode === 'conceitos'){
-          questions.push(i % 2 === 0 ? definitionQuestion(i) : identificationQuestion(i));
-        } else if(mode === 'aplicacao'){
-          questions.push(i % 2 === 0 ? applicationQuestion(i) : identificationQuestion(i));
-        } else {
-          const type = i % 3;
-          questions.push(type === 0 ? definitionQuestion(i) : type === 1 ? identificationQuestion(i) : applicationQuestion(i));
-        }
+        questions.push(i % 2 === 0 ? qDef(i) : qId(i));
       }
 
       return { questions };
-    }
-
-    async function generateQuizWithAI(subject, materialText, quantity=50, mode='misto') {
-  try {
-    const result = await callGemini('quiz', {
-      subject,
-      text: materialText,
-      quantity,
-      mode
-    });
-
-    if (!result.questions || !Array.isArray(result.questions)) {
-      throw new Error('Formato inválido de questões');
-    }
-
-    return {
-      questions: result.questions.slice(0, quantity).map((q, index) => {
-        const alternatives = Array.isArray(q.alternatives)
-          ? q.alternatives.slice(0, 5)
-          : [];
-
-        while (alternatives.length < 5) {
-          alternatives.push('Alternativa insuficiente para responder corretamente.');
-        }
-
-        let correctIndex = Number(q.correctIndex);
-
-        if (Number.isNaN(correctIndex) || correctIndex < 0 || correctIndex > 4) {
-          correctIndex = 0;
-        }
-
-        return {
-          id: q.id || uid(),
-          statement: q.statement || `Questão ${index + 1}`,
-          alternatives,
-          correctIndex,
-          explanation: q.explanation || 'A resposta correta se baseia no conteúdo enviado.',
-          base: q.studyPoint || q.base || 'Conteúdo dos materiais enviados.',
-          difficulty: q.difficulty || 'médio'
-        };
-      })
-    };
-
-  } catch (error) {
-    console.warn('Gemini falhou. Usando simulado local:', error);
-    toast('Gemini indisponível. Usei simulado local.', 'warn');
-    return generateQuizLocally(subject, materialText, quantity, mode);
-  }
-}
-
-    async function transcribeAudioWithAI(file){
-      /*
-        Futuramente:
-        áudio/vídeo -> backend -> Gemini/serviço de transcrição -> texto.
-        Por enquanto, use o campo de complemento para colar transcrição/resumo.
-      */
-      return '';
     }
 
     function shuffle(arr){
@@ -1488,11 +1387,11 @@ function normalizeGeminiGuide(result, subject) {
       const text = cleanEducationalText(corpus.text);
 
       if(text.length < 400){
-        toast('Base insuficiente. Envie mais conteúdo real ou transcrição.', 'warn');
+        toast('Base insuficiente. Envie mais conteúdo.', 'warn');
         return;
       }
 
-      const result = await generateQuizWithAI(subject, text, 50, mode);
+      const result = await generateQuizWithAI(subject, text, 10, mode);
 
       if(result.error){
         toast(result.error, 'warn');
@@ -1507,7 +1406,6 @@ function normalizeGeminiGuide(result, subject) {
       };
 
       renderQuiz();
-      toast('Simulado inteligente gerado.', 'success');
     }
 
     function renderQuiz(){
@@ -1517,7 +1415,7 @@ function normalizeGeminiGuide(result, subject) {
       }
 
       $('quizArea').innerHTML = `
-        <div class="alert info">Simulado de <strong>${activeQuiz.subject}</strong> gerado com 50 questões.</div>
+        <div class="alert info">Simulado de <strong>${activeQuiz.subject}</strong> gerado com ${activeQuiz.questions.length} questões.</div>
 
         <form id="quizForm">
           ${activeQuiz.questions.map((q,idx) => `
@@ -1561,9 +1459,9 @@ function normalizeGeminiGuide(result, subject) {
               <strong>Gabarito:</strong>
               ${String.fromCharCode(65+q.correctIndex)}) ${q.alternatives[q.correctIndex]}
               <br>
-              <strong>Base de estudo:</strong> ${q.base || q.studyPoint || 'Conteúdo dos materiais enviados.'}
+              <strong>Base:</strong> ${q.base || q.studyPoint || 'Conteúdo enviado.'}
               <br>
-              <strong>Como revisar:</strong> ${ok ? 'Você acertou. Mantenha esse conceito na revisão espaçada.' : q.explanation}
+              <strong>Revisão:</strong> ${ok ? 'Você acertou.' : q.explanation}
             </div>
           </div>
         `;
@@ -1585,27 +1483,13 @@ function normalizeGeminiGuide(result, subject) {
 
       $('quizArea').innerHTML = `
         <div class="stats">
-          <div class="stat">
-            <div class="label">Acertos</div>
-            <div class="value">${score}/${activeQuiz.questions.length}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Aproveitamento</div>
-            <div class="value">${percent}%</div>
-          </div>
-          <div class="stat">
-            <div class="label">Matéria</div>
-            <div class="value" style="font-size:22px">${activeQuiz.subject}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Status</div>
-            <div class="value" style="font-size:22px">${percent >= 70 ? 'Bom' : 'Revisar'}</div>
-          </div>
+          <div class="stat"><div class="label">Acertos</div><div class="value">${score}/${activeQuiz.questions.length}</div></div>
+          <div class="stat"><div class="label">Aproveitamento</div><div class="value">${percent}%</div></div>
+          <div class="stat"><div class="label">Matéria</div><div class="value" style="font-size:22px">${activeQuiz.subject}</div></div>
+          <div class="stat"><div class="label">Status</div><div class="value" style="font-size:22px">${percent >= 70 ? 'Bom' : 'Revisar'}</div></div>
         </div>
         ${review}
       `;
-
-      toast(`Resultado: ${score}/${activeQuiz.questions.length}`, percent >= 75 ? 'success' : percent >= 55 ? 'warn' : 'danger');
     }
 
     function clearQuiz(){
@@ -1613,51 +1497,11 @@ function normalizeGeminiGuide(result, subject) {
       $('quizArea').innerHTML = '<div class="empty">Escolha uma matéria e gere o simulado.</div>';
     }
 
-    function addEvent(){
-      const type = $('eventType').value;
-      const subject = $('eventSubject').value.trim();
-      const title = $('eventTitle').value.trim();
-      const date = $('eventDate').value;
-      const time = $('eventTime').value;
-      const note = $('eventNote').value.trim();
-
-      if(!subject || !title || !date){
-        toast('Preencha matéria, título e data.', 'warn');
-        return;
-      }
-
-      state.events.unshift({
-        id: uid(),
-        type,
-        subject,
-        title,
-        date,
-        time,
-        note,
-        createdAt: new Date().toISOString()
-      });
-
-      $('eventSubject').value = '';
-      $('eventTitle').value = '';
-      $('eventDate').value = '';
-      $('eventTime').value = '';
-      $('eventNote').value = '';
-
-      saveState();
-      toast('Compromisso salvo.', 'success');
-    }
-
-    function removeEvent(id){
-      state.events = state.events.filter(e => e.id !== id);
-      saveState();
-    }
-
     function removeMaterial(id){
       if(!confirm('Remover este material?')) return;
       state.materials = state.materials.filter(m => m.id !== id);
       state.reviews = state.reviews.filter(r => r.materialId !== id);
       saveState();
-      toast('Material removido.', 'info');
     }
 
     function setReviewLevel(id, level){
@@ -1665,18 +1509,12 @@ function normalizeGeminiGuide(result, subject) {
       if(!review) return;
 
       review.level = level;
-      review.status = 'agendada';
 
-      if(level === 'nao_entendi'){
-        review.dueDate = addDays(1);
-      } else if(level === 'mais_ou_menos'){
-        review.dueDate = addDays(3);
-      } else {
-        review.dueDate = addDays(7);
-      }
+      if(level === 'nao_entendi') review.dueDate = addDays(1);
+      else if(level === 'mais_ou_menos') review.dueDate = addDays(3);
+      else review.dueDate = addDays(7);
 
       saveState();
-      toast('Revisão reagendada.', 'success');
     }
 
     function openReview(id){
@@ -1698,22 +1536,10 @@ function normalizeGeminiGuide(result, subject) {
       const subjects = getSubjects();
 
       $('statsBox').innerHTML = `
-        <div class="stat">
-          <div class="label">Matérias</div>
-          <div class="value">${subjects.length}</div>
-        </div>
-        <div class="stat">
-          <div class="label">Materiais</div>
-          <div class="value">${state.materials.length}</div>
-        </div>
-        <div class="stat">
-          <div class="label">Revisões</div>
-          <div class="value">${state.reviews.filter(r => r.dueDate <= todayISO()).length}</div>
-        </div>
-        <div class="stat">
-          <div class="label">Última nota</div>
-          <div class="value">${state.quizHistory[0] ? state.quizHistory[0].percent + '%' : '—'}</div>
-        </div>
+        <div class="stat"><div class="label">Matérias</div><div class="value">${subjects.length}</div></div>
+        <div class="stat"><div class="label">Materiais</div><div class="value">${state.materials.length}</div></div>
+        <div class="stat"><div class="label">Revisões</div><div class="value">${state.reviews.filter(r => r.dueDate <= todayISO()).length}</div></div>
+        <div class="stat"><div class="label">Última nota</div><div class="value">${state.quizHistory[0] ? state.quizHistory[0].percent + '%' : '—'}</div></div>
       `;
     }
 
@@ -1725,11 +1551,11 @@ function normalizeGeminiGuide(result, subject) {
         : '<div class="empty">Nenhum guia ainda.</div>';
 
       if(!state.materials.length){
-        $('nextStep').innerHTML = '<div class="alert info">Envie seu primeiro PDF, imagem ou transcrição em <strong>Materiais</strong>.</div>';
+        $('nextStep').innerHTML = '<div class="alert info">Envie seu primeiro material em <strong>Materiais</strong>.</div>';
       } else if(state.reviews.some(r => r.dueDate <= todayISO())){
         $('nextStep').innerHTML = '<div class="alert warn">Você tem revisões pendentes. Vá em <strong>Revisões</strong>.</div>';
       } else {
-        $('nextStep').innerHTML = '<div class="alert success">Você já pode gerar um simulado inteligente.</div>';
+        $('nextStep').innerHTML = '<div class="alert success">Você já pode gerar um simulado.</div>';
       }
     }
 
@@ -1744,35 +1570,15 @@ function normalizeGeminiGuide(result, subject) {
           <div class="item-top">
             <div>
               <div class="item-title">${m.title}</div>
-              <div class="item-meta">
-                ${m.subject} • ${m.fileNames?.length || 0} arquivo(s) • ${m.cleanText.split(/\s+/).length} palavra(s) úteis
-              </div>
+              <div class="item-meta">${m.subject} • ${m.fileNames?.length || 0} arquivo(s)</div>
             </div>
             <button class="secondary" onclick="removeMaterial('${m.id}')">Remover</button>
           </div>
-
           <div class="chip-row">
             ${(m.guide?.concepts || []).slice(0,6).map(c => `<span class="chip">${c.term}</span>`).join('')}
           </div>
         </div>
       `).join('');
-    }
-
-    function renderEvents(){
-      const sorted = [...state.events].sort((a,b) => a.date.localeCompare(b.date));
-
-      $('eventsList').innerHTML = sorted.length ? sorted.map(e => `
-        <div class="item">
-          <div class="item-top">
-            <div>
-              <div class="item-title">${e.title}</div>
-              <div class="item-meta">${e.type} • ${e.subject} • ${formatDate(e.date)} ${e.time || ''}</div>
-              ${e.note ? `<div class="item-meta">${e.note}</div>` : ''}
-            </div>
-            <button class="secondary" onclick="removeEvent('${e.id}')">Remover</button>
-          </div>
-        </div>
-      `).join('') : '<div class="empty">Nenhum compromisso salvo.</div>';
     }
 
     function renderReviews(){
@@ -1806,7 +1612,7 @@ function normalizeGeminiGuide(result, subject) {
 
       const corpus = getCorpus(selected);
       const words = corpus.text.trim() ? corpus.text.trim().split(/\s+/).length : 0;
-      $('quizBaseInfo').innerHTML = `Base atual: <strong>${corpus.materials.length}</strong> pacote(s), <strong>${words}</strong> palavra(s) úteis.`;
+      $('quizBaseInfo').innerHTML = `Base atual: <strong>${corpus.materials.length}</strong> pacote(s), <strong>${words}</strong> palavra(s).`;
     }
 
     function renderReports(){
@@ -1815,7 +1621,7 @@ function normalizeGeminiGuide(result, subject) {
       $('quizHistory').innerHTML = history.length ? history.map(h => `
         <div class="item">
           <div class="item-title">${h.subject}</div>
-          <div class="item-meta">${new Date(h.createdAt).toLocaleString('pt-BR')} • ${h.score}/${h.total || 50} • ${h.percent}%</div>
+          <div class="item-meta">${new Date(h.createdAt).toLocaleString('pt-BR')} • ${h.score}/${h.total || 10} • ${h.percent}%</div>
         </div>
       `).join('') : '<div class="empty">Nenhum simulado feito.</div>';
 
@@ -1825,32 +1631,11 @@ function normalizeGeminiGuide(result, subject) {
 
       $('performanceBox').innerHTML = `
         <div class="stats">
-          <div class="stat">
-            <div class="label">Média</div>
-            <div class="value">${history.length ? avg + '%' : '—'}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Simulados</div>
-            <div class="value">${history.length}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Materiais</div>
-            <div class="value">${state.materials.length}</div>
-          </div>
-          <div class="stat">
-            <div class="label">Revisões</div>
-            <div class="value">${state.reviews.length}</div>
-          </div>
+          <div class="stat"><div class="label">Média</div><div class="value">${history.length ? avg + '%' : '—'}</div></div>
+          <div class="stat"><div class="label">Simulados</div><div class="value">${history.length}</div></div>
+          <div class="stat"><div class="label">Materiais</div><div class="value">${state.materials.length}</div></div>
+          <div class="stat"><div class="label">Revisões</div><div class="value">${state.reviews.length}</div></div>
         </div>
-      `;
-
-      const due = state.reviews.filter(r => r.dueDate <= todayISO()).length;
-      const nextExam = state.events.filter(e => e.type === 'prova' && e.date >= todayISO()).sort((a,b) => a.date.localeCompare(b.date))[0];
-
-      $('recommendationsBox').innerHTML = `
-        ${due ? `<div class="alert warn">Revise hoje ${due} conteúdo(s) pendente(s).</div>` : '<div class="alert success">Nenhuma revisão vencida agora.</div>'}
-        ${nextExam ? `<div class="alert info">Próxima prova: <strong>${nextExam.title}</strong> em ${formatDate(nextExam.date)}.</div>` : '<div class="alert info">Cadastre suas provas no cronograma.</div>'}
-        ${avg && avg < 70 ? '<div class="alert danger">Sua média está abaixo de 70%. Gere simulados menores por matéria e revise os erros.</div>' : ''}
       `;
     }
 
@@ -1890,56 +1675,14 @@ function normalizeGeminiGuide(result, subject) {
       toast('Tudo zerado.', 'info');
     }
 
-    async function requestNotifications(){
-      if(!('Notification' in window)){
-        toast('Seu navegador não suporta notificações.', 'danger');
-        return;
-      }
-
-      const permission = await Notification.requestPermission();
-      if(permission === 'granted'){
-        toast('Lembretes ativados.', 'success');
-      } else {
-        toast('Permissão negada.', 'warn');
-      }
-    }
-
-    function checkAlerts(){
-      if(!('Notification' in window) || Notification.permission !== 'granted') return;
-
-      const today = todayISO();
-
-      state.events.forEach(e => {
-        const key = `event_${e.id}_${today}`;
-        if(e.date === today && !localStorage.getItem(key)){
-          new Notification('Russo', {
-            body: e.type === 'aula'
-              ? `Hoje tem ${e.title}. Envie os slides e o áudio da aula.`
-              : `Hoje tem ${e.title}.`
-          });
-          localStorage.setItem(key, '1');
-        }
-      });
-
-      const due = state.reviews.filter(r => r.dueDate <= today);
-      if(due.length && !localStorage.getItem(`review_${today}`)){
-        new Notification('Russo', {
-          body: `Você tem ${due.length} revisão(ões) para hoje.`
-        });
-        localStorage.setItem(`review_${today}`, '1');
-      }
-    }
-
     function renderAll(){
       saveStatus();
       renderStats();
       renderHome();
       renderMaterials();
-      renderEvents();
       renderReviews();
       renderQuizSelect();
       renderReports();
-
       if(activeQuiz) renderQuiz();
     }
 
@@ -1955,7 +1698,6 @@ function normalizeGeminiGuide(result, subject) {
       $('currentGuide').innerHTML = '';
     });
 
-    $('addEventBtn').addEventListener('click', addEvent);
     $('generateQuizBtn').addEventListener('click', buildQuiz);
     $('clearQuizBtn').addEventListener('click', clearQuiz);
     $('quizSubject').addEventListener('change', renderQuizSelect);
@@ -1970,19 +1712,15 @@ function normalizeGeminiGuide(result, subject) {
     });
 
     $('resetBtn').addEventListener('click', resetAll);
-    $('notifyBtn').addEventListener('click', requestNotifications);
 
     window.correctQuiz = correctQuiz;
     window.removeMaterial = removeMaterial;
-    window.removeEvent = removeEvent;
     window.openReview = openReview;
     window.setReviewLevel = setReviewLevel;
 
     bindNav();
     bindDropzone();
     renderAll();
-    checkAlerts();
-    setInterval(checkAlerts, 60000);
   </script>
 </body>
 </html>
